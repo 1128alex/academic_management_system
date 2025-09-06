@@ -1,4 +1,4 @@
-# Alex Lee — Academic Management System (Spring Boot + MyBatis + JSP)
+# Academic Management System (Spring Boot + MyBatis + JSP)
 
 A full‑stack university management web app: authentication, course registry, assignments, forum board, real‑time chat, email notifications, and profile uploads. Built with Spring Boot 2.7, Java 17, MyBatis, JSP/JSTL, and MySQL.
 
