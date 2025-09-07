@@ -16,8 +16,8 @@ A full‑stack university management web app: authentication, course registry, a
 - Java 17, Spring Boot 2.7.x
 - MyBatis (XML mappers)
 - JSP + JSTL with embedded Tomcat (Jasper)
-- MySQL 8.x (mysql-connector-j)
-- Spring Mail, Spring WebSocket
+- MySQL 8.x
+- Spring WebSocket
 - Gradle (Wrapper included)
 
 ## 📁 Project Structure (key parts)
@@ -25,28 +25,28 @@ A full‑stack university management web app: authentication, course registry, a
 src/
 	main/
 		java/com/univ/
-			UnivWebApplication.java      # Spring Boot entry point
+			UnivWebApplication.java
 			config/
-				DatabaseConfig.java        # MyBatis + mapper locations
-				WebMvcConfig.java          # Static resources, interceptor wiring
+				DatabaseConfig.java
+				WebMvcConfig.java
 			interceptor/
-				PermissionInterceptor.java # Login/session guard
+				PermissionInterceptor.java
 			common/
-				FileManagerService.java    # File uploads (local FS)
+				FileManagerService.java
 				EncryptUtils.java
-			user/                        # MVC + REST for users
-			course/                      # courses & enrollment
-			assignment/                  # assignments
-			board/                       # forum/board
-			chat/                        # websocket chat
-			registry/                    # registry-related endpoints
-			mail/                        # email flows
+			user/
+			course/
+			assignment/
+			board/
+			chat/
+			registry/
+			mail/
 		resources/
-			application.yml              # server, datasource, mail
-			mappers/*.xml                # MyBatis mapper XMLs
+			application.yml
+			mappers/*.xml
 			static/
-				css/, img/, db_query/      # styles, images, SQL scripts
-		webapp/WEB-INF/jsp/            # JSP views (layouts, pages)
+				css/, img/, db_query/
+		webapp/WEB-INF/jsp/
 ```
 
 ## 🚀 Getting Started (Local)
@@ -59,12 +59,10 @@ src/
 - Create a database (default in `application.yml`): `univ_web_schema`
 - Run SQL from `src/main/resources/static/db_query/` in order:
 	- `Table_Create.sql`
-	- `Insert_Examples.sql` (optional sample data)
-
+ 
 3) Configure application
 - Edit `src/main/resources/application.yml`:
 	- `spring.datasource.url`, `username`, `password`
-	- Optional: change `server.port` (defaults to 80)
 - If using email, set credentials (add):
 	- `spring.mail.username`, `spring.mail.password`
 
