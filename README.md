@@ -8,10 +8,10 @@ A full‑stack university management web app: authentication, course registry, a
 
 ## ✨ Features
 - Session-based authentication with role handling (student/professor/admin) and login guard via interceptor
-- Course management and registry (enroll/drop), assignment create/list/detail, and forum-style board
+- Course management and registry (enroll/drop), assignment create/list/grading, and announcement board
 - Real-time chat
 - File uploads (profiles, attachments) with static image serving
-- JSP + JSTL views with shared templates and CSS assets
+- JSP + JSTL views
 
 ## 🛠️ Tech Stack
 - Java 17, Spring Boot 2.7.x
@@ -73,31 +73,24 @@ src/
 		webapp/WEB-INF/jsp/
 ```
 
-## 🚀 Getting Started (Local)
+## 🚀 Getting Started (Localhost)
 
 1) Requirements
 - Java 17, MySQL 8.x
-- PowerShell (Windows) or any shell; Gradle Wrapper is included
 
 2) Database setup (local)
-- Create a database (default in `application.yml`): `univ_web_schema`
+- Create a mysql database: 
+	username: root
+	db: `univ_web_schema`
 - Run SQL from `src/main/resources/static/db_query/` in order:
 	- `Table_Create.sql`
+	- `Insert_examples.sql`
  
-3) Configure application
-- Edit `src/main/resources/application.yml`:
-	- `spring.datasource.url`, `username`, `password`
-- If using email, set credentials (add):
-	- `spring.mail.username`, `spring.mail.password`
-
-4) Configure file uploads
-- Update `FileManagerService.FILE_UPLOAD_PATH` to a valid folder on your machine and ensure the directory exists.
-
-5) Run the app
+3) Run the app
 ```powershell
 .\gradlew.bat bootRun
 ```
-- Open http://localhost/univ/user/sign_in (port 80) or http://localhost:8080/univ/user/sign_in if you changed the port.
+- Open http://localhost:8080/.
 
 Test accounts
 - Student: student@auniv.com / 1111
@@ -108,14 +101,6 @@ Test accounts
 .\gradlew.bat build
 ```
 Outputs the bootable JAR to `build\libs\UnivWeb-0.0.1-SNAPSHOT.jar`.
-
-## 🌐 Deploy
-- Bootable JAR (example):
-	```powershell
-	java -jar build\libs\UnivWeb-0.0.1-SNAPSHOT.jar
-	```
-- Configure `server.port` and production datasource/mail settings via `application.yml` or environment variables.
-- Ensure the upload path (`FileManagerService`) exists on the server and is writable.
 
 ## 📄 License
 Please credit the author when you use parts of this repository.
