@@ -47,8 +47,8 @@ A full‑stack university management web app: authentication, course registry, a
 ## 📁 Project Structure (key parts)
 ```
 src/
-	main/
-		java/com/univ/
+	main/                      // backend
+		java/com/univ/         // application packages and controllers
 			UnivWebApplication.java
 			config/
 				DatabaseConfig.java
@@ -65,12 +65,12 @@ src/
 			chat/
 			registry/
 			mail/
-		resources/
-			application.yml
-			mappers/*.xml
-			static/
-				css/, img/, db_query/
-		webapp/WEB-INF/jsp/
+	resources/                 // config, mappers and static resources
+		application.yml
+		mappers/*.xml
+		static/                 // public assets (css, images, db scripts)
+			css/, img/, db_query/
+	webapp/WEB-INF/jsp/         // frontend
 ```
 
 ## 🚀 Getting Started (Localhost)
