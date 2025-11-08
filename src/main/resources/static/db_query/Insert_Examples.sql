@@ -5,6 +5,7 @@ VALUES
 ('admin@auniv.com','b59c67bf196a4758191e42f76670ceba', 'admin','admin','A','2000-01-01','Prefer not to disclose','Who is the founder of Alex University?','Alex Lee',NOW(),NOW()),
 ('student@auniv.com','b59c67bf196a4758191e42f76670ceba', 'student','Alex','Lee','2003-11-28','Male','Who is the founder of Alex University?','Alex Lee',NOW(),NOW()),
 ('professor@auniv.com','b59c67bf196a4758191e42f76670ceba', 'professor','Professor','A','2000-01-01','Male','Who is the founder of Alex University?','Alex Lee',NOW(),NOW())
+
 ;
 
 alter table `course` modify `price` int null;
