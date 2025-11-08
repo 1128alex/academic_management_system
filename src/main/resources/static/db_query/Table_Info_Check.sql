@@ -43,3 +43,7 @@ SELECT
 FROM
     `comment`;
 DESC `comment`;
+SELECT 
+    *
+FROM
+    `chat`;

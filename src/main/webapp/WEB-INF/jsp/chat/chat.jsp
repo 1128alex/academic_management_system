@@ -1,152 +1,149 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!-- Core -->
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!--Formatting-->
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html>
-<div class="d-flex">
-	<div class="col-2"></div>
-	<div class="col-8 d-flex">
-		<div class="col-4 chatRoomList greyBorder mt-4 px-0 noneSelectable">
-			<div class="d-flex justify-content-between align-items-center">
-				<h2 class="m-3">Chat List</h2>
-				<div>
-					<button type="button" id="createChatBtn" class="mr-2 btn button">New
-						Chat</button>
-					<!-- <button type="button" id="createChatBtn" class="btn button"
-						data-toggle="modal" data-target="#modal">New Chat</button> -->
-				</div>
-			</div>
-
-			<table class="table roomListTable">
-				<tbody>
-					<c:forEach var="room" items="${roomList}">
-						<c:choose>
-							<c:when test="${currentRoom.id eq room.id}">
-								<tr class="linkRow selectedChatRoom" data-room-id="${room.id}">
-									<td class="w-100">${room.roomName}</td>
-									<td></td>
-								</tr>
-							</c:when>
-							<c:otherwise>
-								<tr class="linkRow" data-room-id="${room.id}">
-									<td class="w-100">${room.roomName}</td>
-									<td></td>
-								</tr>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
-				</tbody>
-			</table>
-
-		</div>
-		<div class="col-8 greyBorder mt-4 px-0">
-			<div class="ml-2 py-2 chatRoomTitle d-flex justify-content-between">
-				<div class="col-9 unselectable">
-					<h3>${currentRoom.roomName}</h3>
-				</div>
-				<c:if test="${currentRoom.roomName ne null}">
-					<a class="dropdown-toggle hover-pointer mr-2"
-						data-toggle="dropdown"> <img class="profileImgBox"
-						src="/static/img/noprofile.png" height="30" width="30">
-					</a>
-					<div class="dropdown-menu col-3">
-						<c:forEach var="member" items="${memberList}">
-							<div class="dropdown-item px-0">
-								<div class="d-flex align-items-center">
-									<img alt="profile" class="profileImgBox mx-2"
-										src="${member.profileUrl}" height="30" width="30">
-									<div>${member.firstName += ' ' += member.lastName}</div>
-								</div>
-							</div>
-						</c:forEach>
-					</div>
-				</c:if>
-			</div>
-			<div id="chatBox" class="chatRoomBox greyborder px-2">
-				<div id="currentDateHolder" hidden="hidden">${currentDate}</div>
-			</div>
-			<c:if test="${currentRoom.roomName ne null}">
-				<div class="d-flex">
-					<input type="text" id="content" class="form-control sharpBorder">
-					<button type="button" id="sendBtn" class="btn button sharpBorder">Send</button>
-				</div>
-			</c:if>
-		</div>
-	</div>
-	<div class="col-2"></div>
-	<div id="dataHolder" data-email="${loggedEmail}"
-		data-room-id="${currentRoom.id}" data-current-id="0"></div>
-</div>
-
-<%-- <div class="modal fade" id="modal" data-backdrop="static"
-	data-refresh="true">
-	<div class="modal-dialog modal-lg modal-dialog-centered">
-		<div class="modal-content">
-			<div class="d-flex justify-content-end">
-				<button id="closeBtn" class="btn button" data-dismiss="modal">Close</button>
-			</div>
-			<h3 class="text-center">Make a Chat room with...</h3>
-			<div class="ml-2">
-				<h4>Selected</h4>
-				<hr>
-				<div id="recieverList" class="d-flex"></div>
-				<hr>
-			</div>
-			<div class="mt-3 d-flex justify-content-center">
-				<label class="mr-2"><input type="radio" name="type"
-					checked="checked" value="student">Student</label> <label><input
-					type="radio" name="type" value="professor">Professor</label>
-			</div>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+	<!-- Core -->
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+		<!--Formatting-->
+		<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+			<!DOCTYPE html>
 			<div class="d-flex">
-				<input type="text" id="nameSearch" class="form-control sharpBorder"
-					placeholder="Search for name">
-				<button type="button" id="searchBtn" class="btn button sharpBorder">Search</button>
-			</div>
-			<div id="userListBox">
-				<table class="table" id="userListTable">
-					<c:forEach var="user" items="${userList}">
-						<tr class="linkRow">
-							<td><input type="checkbox"></td>
-							<td>${user.email}</td>
-							<td>${user.firstName += ' ' += user.lastName}</td>
-							<c:if test="${user.studentNum ne null}">
-								<td>${user.studentNum}</td>
+				<div class="col-2"></div>
+				<div class="col-8 d-flex">
+					<div class="col-4 chatRoomList greyBorder mt-4 px-0 noneSelectable">
+						<div class="d-flex justify-content-between align-items-center">
+							<h2 class="m-3">Chat List</h2>
+							<div>
+								<button type="button" id="createChatBtn" class="mr-2 btn button">New
+									Chat</button>
+								<!-- <button type="button" id="createChatBtn" class="btn button"
+						data-toggle="modal" data-target="#modal">New Chat</button> -->
+							</div>
+						</div>
+
+						<table class="table roomListTable">
+							<tbody>
+								<c:forEach var="room" items="${roomList}">
+									<c:choose>
+										<c:when test="${currentRoom.id eq room.id}">
+											<tr class="linkRow selectedChatRoom" data-room-id="${room.id}">
+												<td class="w-100">${room.roomName}</td>
+												<td></td>
+											</tr>
+										</c:when>
+										<c:otherwise>
+											<tr class="linkRow" data-room-id="${room.id}">
+												<td class="w-100">${room.roomName}</td>
+												<td></td>
+											</tr>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+							</tbody>
+						</table>
+
+					</div>
+					<div class="col-8 greyBorder mt-4 px-0">
+						<div class="ml-2 py-2 chatRoomTitle d-flex justify-content-between">
+							<div class="col-9 unselectable">
+								<h3>${currentRoom.roomName}</h3>
+							</div>
+							<c:if test="${currentRoom.roomName ne null}">
+								<a class="dropdown-toggle hover-pointer mr-2" data-toggle="dropdown"> <img
+										class="profileImgBox" src="/static/img/noprofile.png" height="30" width="30">
+								</a>
+								<div class="dropdown-menu col-3">
+									<c:forEach var="member" items="${memberList}">
+										<div class="dropdown-item px-0">
+											<div class="d-flex align-items-center">
+												<img alt="profile" class="profileImgBox mx-2" src="${member.profileUrl}"
+													height="30" width="30">
+												<div>${member.firstName += ' ' += member.lastName}</div>
+											</div>
+										</div>
+									</c:forEach>
+								</div>
 							</c:if>
-						</tr>
-					</c:forEach>
-				</table>
+						</div>
+						<div id="chatBox" class="chatRoomBox greyborder px-2">
+							<div id="currentDateHolder" hidden="hidden">${currentDate}</div>
+						</div>
+						<c:if test="${currentRoom.roomName ne null}">
+							<div class="d-flex">
+								<input type="text" id="content" class="form-control sharpBorder">
+								<button type="button" id="sendBtn" class="btn button sharpBorder">Send</button>
+							</div>
+						</c:if>
+					</div>
+				</div>
+				<div class="col-2"></div>
+				<div id="dataHolder" data-email="${loggedEmail}" data-room-id="${currentRoom.id}" data-current-id="0">
+				</div>
 			</div>
-			<div class="d-flex justify-content-end">
-				<button id="createBtn" class="btn button">Create</button>
-			</div>
-		</div>
-	</div>
-</div>
- --%>
-<script>
-	$(document)
-			.ready(
-					function() {
-						var offset = new Date().getTimezoneOffset();
 
-						const element = document.getElementById("chatBox");
-						element.scrollTop = element.scrollHeight;
+			<%-- <div class="modal fade" id="modal" data-backdrop="static" data-refresh="true">
+				<div class="modal-dialog modal-lg modal-dialog-centered">
+					<div class="modal-content">
+						<div class="d-flex justify-content-end">
+							<button id="closeBtn" class="btn button" data-dismiss="modal">Close</button>
+						</div>
+						<h3 class="text-center">Make a Chat room with...</h3>
+						<div class="ml-2">
+							<h4>Selected</h4>
+							<hr>
+							<div id="recieverList" class="d-flex"></div>
+							<hr>
+						</div>
+						<div class="mt-3 d-flex justify-content-center">
+							<label class="mr-2"><input type="radio" name="type" checked="checked"
+									value="student">Student</label> <label><input type="radio" name="type"
+									value="professor">Professor</label>
+						</div>
+						<div class="d-flex">
+							<input type="text" id="nameSearch" class="form-control sharpBorder"
+								placeholder="Search for name">
+							<button type="button" id="searchBtn" class="btn button sharpBorder">Search</button>
+						</div>
+						<div id="userListBox">
+							<table class="table" id="userListTable">
+								<c:forEach var="user" items="${userList}">
+									<tr class="linkRow">
+										<td><input type="checkbox"></td>
+										<td>${user.email}</td>
+										<td>${user.firstName += ' ' += user.lastName}</td>
+										<c:if test="${user.studentNum ne null}">
+											<td>${user.studentNum}</td>
+										</c:if>
+									</tr>
+								</c:forEach>
+							</table>
+						</div>
+						<div class="d-flex justify-content-end">
+							<button id="createBtn" class="btn button">Create</button>
+						</div>
+					</div>
+				</div>
+				</div>
+				--%>
+				<script>
+					$(document)
+						.ready(
+							function () {
+								var offset = new Date().getTimezoneOffset();
 
-						let roomId = $('#dataHolder').data("room-id");
-						let currentId = $('#dataHolder').data("current-id");
-						let writer = $('#dataHolder').data("email");
+								const element = document.getElementById("chatBox");
+								element.scrollTop = element.scrollHeight;
 
-						addEventListener("keydown", function(e) {
-							if (e.key === "Enter") {
-								$('#sendBtn').click();
-							}
-						});
-						$('#sendBtn')
-								.on(
+								let roomId = $('#dataHolder').data("room-id");
+								let currentId = $('#dataHolder').data("current-id");
+								let writer = $('#dataHolder').data("email");
+
+								addEventListener("keydown", function (e) {
+									if (e.key === "Enter") {
+										$('#sendBtn').click();
+									}
+								});
+								$('#sendBtn')
+									.on(
 										'click',
-										function() {
+										function () {
 											let content = $('#content').val()
 											$('#content').val('');
 
@@ -159,59 +156,59 @@
 											}
 
 											$
-													.ajax({
-														type : "GET",
-														url : "/chat/add_message",
-														data : {
-															"roomId" : roomId,
-															"writer" : writer,
-															"content" : content
-														},
-														success : function(data) {
-															if (data.code == 1) {
-															} else {
-																alert("error "
-																		+ data.code
-																		+ ": "
-																		+ data.errorMessage);
-															}
-														},
-														error : function(e) {
-															alert("error: " + e);
+												.ajax({
+													type: "GET",
+													url: "/chat/add_message",
+													data: {
+														"roomId": roomId,
+														"writer": writer,
+														"content": content
+													},
+													success: function (data) {
+														if (data.code == 1) {
+														} else {
+															alert("error "
+																+ data.code
+																+ ": "
+																+ data.errorMessage);
 														}
-													});
+													},
+													error: function (e) {
+														alert("error: " + e);
+													}
+												});
 										});
 
-						/* let pause = false;
-						setInterval(
-								function() {
-									if (pause == false) {
-										if (roomId == '') {
-											return;
-										}
-										pause = true;
-										if (currentId == '') {
-											currentId = 0;
-										}
+								let pause = false;
+								setInterval(
+									function () {
+										if (pause == false) {
+											if (roomId == '') {
+												return;
+											}
+											pause = true;
+											if (currentId == '') {
+												currentId = 0;
+											}
 
-										$
+											$
 												.ajax({
-													type : "GET",
-													url : "/chat/get_new_message",
-													data : {
-														"roomId" : roomId,
-														"currentId" : currentId
+													type: "GET",
+													url: "/chat/get_new_message",
+													data: {
+														"roomId": roomId,
+														"currentId": currentId
 													},
-													success : function(data) {
+													success: function (data) {
 														if (data.code == 1) {
 															for (let i = 0; i < data.newChatList.length; i++) {
 																let currentDate = $(
-																		'#currentDateHolder')
-																		.text();
+																	'#currentDateHolder')
+																	.text();
 																let createdAt = new Date(
-																		data.newChatList[i].createdAt);
+																	data.newChatList[i].createdAt);
 																let hours = createdAt
-																		.getHours();
+																	.getHours();
 																let ampm = "AM";
 																if (hours >= 12) {
 																	ampm = "PM"
@@ -222,109 +219,109 @@
 																}
 
 																var minutes = createdAt
-																		.getMinutes();
+																	.getMinutes();
 																if (minutes < 10) {
 																	minutes = "0"
-																			+ minutes;
+																		+ minutes;
 																}
 																var date = createdAt
-																		.getDate();
+																	.getDate();
 
 																const monthNames = [
-																		"January",
-																		"Febuary",
-																		"March",
-																		"April",
-																		"May",
-																		"June",
-																		"July",
-																		"August",
-																		"September",
-																		"October",
-																		"November",
-																		"December" ];
+																	"January",
+																	"Febuary",
+																	"March",
+																	"April",
+																	"May",
+																	"June",
+																	"July",
+																	"August",
+																	"September",
+																	"October",
+																	"November",
+																	"December"];
 																var month = createdAt
-																		.getMonth();
+																	.getMonth();
 																var year = createdAt
-																		.getFullYear();
+																	.getFullYear();
 																if (currentDate != date) {
 																	$(
-																			'#chatBox')
-																			.append(
-																					'<div class="d-flex justify-content-center">-----'
-																							+ monthNames[month]
-																							+ " "
-																							+ date
-																							+ ", "
-																							+ year
-																							+ '-----</div>');
+																		'#chatBox')
+																		.append(
+																			'<div class="d-flex justify-content-center">-----'
+																			+ monthNames[month]
+																			+ " "
+																			+ date
+																			+ ", "
+																			+ year
+																			+ '-----</div>');
 
 																	$(
-																			'#currentDateHolder')
-																			.text(
-																					date);
+																		'#currentDateHolder')
+																		.text(
+																			date);
 																}
 
 																if (data.newChatList[i].writer == writer) {
 																	$(
-																			'#chatBox')
-																			.append(
-																					'<div class="d-flex justify-content-end my-2"><div class="d-flex align-items-end mr-1 unselectable"><div>'
-																							+ hours
-																							+ ':'
-																							+ minutes
-																							+ " "
-																							+ ampm
-																							+ '</div></div><div class="chatBalloon myChat px-2"><c:set var="currentChatId" value="${chat.id}"></c:set><div>'
-																							+ data.newChatList[i].content
-																							+ '</div></div></div>');
+																		'#chatBox')
+																		.append(
+																			'<div class="d-flex justify-content-end my-2"><div class="d-flex align-items-end mr-1 unselectable"><div>'
+																			+ hours
+																			+ ':'
+																			+ minutes
+																			+ " "
+																			+ ampm
+																			+ '</div></div><div class="chatBalloon myChat px-2"><c:set var="currentChatId" value="${chat.id}"></c:set><div>'
+																			+ data.newChatList[i].content
+																			+ '</div></div></div>');
 
 																} else if (data.newChatList[i].writer != writer) {
 																	$(
-																			'#chatBox')
-																			.append(
-																					'<div class="d-flex my-2"><div class="mr-2 unselectable"><img alt="" src="'+data.newChatList[i].profileUrl+'" class="profileImgBox" height="30px" width="30px"></div><div><div><b class="unselectable">'
-																							+ data.newChatList[i].firstName
-																							+ ' '
-																							+ data.newChatList[i].lastName
-																							+ '</b></div><div class="d-flex"><div class="chatBalloon px-2"><c:set var="currentChatId" value="${chat.id}"></c:set><div>'
-																							+ data.newChatList[i].content
-																							+ '</div></div><div class="d-flex align-items-end ml-1 unselectable">'
-																							+ hours
-																							+ ':'
-																							+ minutes
-																							+ " "
-																							+ ampm
-																							+ '</div></div></div></div>');
+																		'#chatBox')
+																		.append(
+																			'<div class="d-flex my-2"><div class="mr-2 unselectable"><img alt="" src="' + data.newChatList[i].profileUrl + '" class="profileImgBox" height="30px" width="30px"></div><div><div><b class="unselectable">'
+																			+ data.newChatList[i].firstName
+																			+ ' '
+																			+ data.newChatList[i].lastName
+																			+ '</b></div><div class="d-flex"><div class="chatBalloon px-2"><c:set var="currentChatId" value="${chat.id}"></c:set><div>'
+																			+ data.newChatList[i].content
+																			+ '</div></div><div class="d-flex align-items-end ml-1 unselectable">'
+																			+ hours
+																			+ ':'
+																			+ minutes
+																			+ " "
+																			+ ampm
+																			+ '</div></div></div></div>');
 																}
 																const element = document
-																		.getElementById("chatBox");
+																	.getElementById("chatBox");
 																element.scrollTop = element.scrollHeight;
 																currentId = data.newChatList[i].id;
 															}
 															pause = false;
 														} else {
 															alert("error "
-																	+ data.code
-																	+ ": "
-																	+ data.errorMessage);
+																+ data.code
+																+ ": "
+																+ data.errorMessage);
 														}
 													},
-													error : function(e) {
+													error: function (e) {
 														alert("error: " + e);
 													}
 												});
-									}
-								}, 200); */
-						$('#createChatBtn').on('click', function() {
-							let nameSearch = $('#nameSearch').val();
-							location.href = "/univ/chat/create_chat";
-						});
+										}
+									}, 200);
+								$('#createChatBtn').on('click', function () {
+									let nameSearch = $('#nameSearch').val();
+									location.href = "/univ/chat/create_chat";
+								});
 
-						$('.linkRow').on('click', function() {
-							let roomId = $(this).data('room-id');
-							location.href = "/univ/chat/room?roomId=" + roomId;
-						});
+								$('.linkRow').on('click', function () {
+									let roomId = $(this).data('room-id');
+									location.href = "/univ/chat/room?roomId=" + roomId;
+								});
 
-					});
-</script>
+							});
+				</script>

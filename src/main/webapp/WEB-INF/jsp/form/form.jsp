@@ -45,10 +45,10 @@
 
 		<h4 class="mt-3">Birth Date</h4>
 		<div class="d-flex justify-content-between">
-			<select name="birthYear" id="birthYear" class="form-control col-3">
+			<select name="birthYear" id="birthYear" class="form-control col-3" onfocus="this.size=10;" onblur="this.size=1;" onchange="this.size=1;">
 				<option value="0">-- Year --</option>
-				<c:forEach var="j" begin="1900" end="${year}">
-					<option id="year">${j}</option>
+				<c:forEach var="j" begin="1900" end="${year}" varStatus="loop">
+					<option id="year" value="${year - (j - 1900)}">${year - (j - 1900)}</option>
 				</c:forEach>
 			</select> <select name="birthMonth" id="birthMonth" class="form-control col-4">
 				<option value="0">-- Month --</option>
