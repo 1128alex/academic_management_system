@@ -1,6 +1,9 @@
 # Academic Management System (Spring Boot + MyBatis + JSP)
 
 A full‑stack university management web app: authentication, course registry, assignments, forum board, real‑time chat, email notifications, and profile uploads. Built with Spring Boot 2.7, Java 17, MyBatis, JSP/JSTL, and MySQL.
+<p align="center">
+	<img src="docs/images/main.png" alt="Courses & enrollment" width="60%"/>
+</p>
 
 - Live Demo: http://3.39.193.52:8080/univ/user/sign_in (currently closed)
 - Slides: https://docs.google.com/presentation/d/1kUDCUyPxO7l87JH-BbeBmj2nD8tYRrdA/edit?slide=id.p1#slide=id.p1
@@ -20,7 +23,7 @@ A full‑stack university management web app: authentication, course registry, a
 - Spring WebSocket
 - Gradle (Wrapper included)
 
-## 📁 Project Structure (key parts)
+## 📁 Project Structure
 ```
 src/
 	main/                      // backend
@@ -79,13 +82,6 @@ Test accounts
 Outputs the bootable JAR to `build\libs\UnivWeb-0.0.1-SNAPSHOT.jar`.
 
 ## 🖼️ Snapshots
-<p align="center">
-	<img src="docs/images/login.png" alt="Sign in" width="60%"/>
-  
-</p>
-<p align="center">
-	<img src="docs/images/main.png" alt="Courses & enrollment" width="60%"/>
-</p>
 <p align="center">
 	<img src="docs/images/class.png" alt="Forum board" width="45%"/>
 	<img src="docs/images/assgnment.png" alt="Real-time chat" width="45%"/>
