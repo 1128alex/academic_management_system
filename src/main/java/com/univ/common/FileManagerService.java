@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,16 +16,16 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileManagerService {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	// Where the files will be saved
-	// Home
-	public static final String FILE_UPLOAD_PATH = "C:\\Users\\이지원\\Documents\\CS\\Final_Project\\Univ_Project\\workspace\\images/";
-	// Camp
-	// public static final String FILE_UPLOAD_PATH =
-	// "D:\\이지원\\7_final_project\\UnivProject\\workspace\\images/";
+	@Value("${app.upload.path:/app/images/}")
+	private String fileUploadPath;
+
+	public String getFileUploadPath() {
+		return fileUploadPath;
+	}
 
 	public String saveFile(String email, MultipartFile file) {
 		String directoryName = email + "_" + System.currentTimeMillis() + "/";
-		String filePath = FILE_UPLOAD_PATH + directoryName;
+		String filePath = fileUploadPath + directoryName;
 
 		File directory = new File(filePath);
 		if (directory.mkdir() == false) {
@@ -46,7 +47,7 @@ public class FileManagerService {
 	}
 
 	public void deleteFile(String filePath) { // filePath
-		Path path = Paths.get(FILE_UPLOAD_PATH + filePath.replace("/images/", ""));
+		Path path = Paths.get(fileUploadPath + filePath.replace("/images/", ""));
 		if (Files.exists(path)) {
 			// delete file
 			try {

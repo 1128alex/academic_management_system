@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    url: jdbc:mysql://mysql:3306/univ_web_schema?characterEncoding=UTF-8&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
+  
+  sql:
+    init:
+      mode: always
+      schema-locations: 
+        - file:/app/sql/Table_Create.sql
+      data-locations: 
+        - file:/app/sql/Insert_Examples.sql
+      continue-on-error: true
+
+  mail:
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+
+app:
+  upload:
+    path: /app/images/

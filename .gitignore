@@ -39,3 +39,6 @@ out/
 application.yml
 
 README2.md
+
+### Docker ###
+.env

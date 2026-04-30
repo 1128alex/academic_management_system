@@ -1,9 +1,11 @@
 # Academic Management System (Spring Boot + MyBatis + JSP)
 
 A full‑stack university management web app: authentication, course registry, assignments, forum board, real‑time chat, email notifications, and profile uploads. Built with Spring Boot 2.7, Java 17, MyBatis, JSP/JSTL, and MySQL.
+<p align="center">
+	<img src="docs/images/main.png" alt="Courses & enrollment" width="60%"/>
+</p>
 
 - Live Demo: http://3.39.193.52:8080/univ/user/sign_in (currently closed)
-- Repository: https://github.com/1128alex/academic_management_system
 - Slides: https://docs.google.com/presentation/d/1kUDCUyPxO7l87JH-BbeBmj2nD8tYRrdA/edit?slide=id.p1#slide=id.p1
 
 ## ✨ Features
@@ -21,30 +23,7 @@ A full‑stack university management web app: authentication, course registry, a
 - Spring WebSocket
 - Gradle (Wrapper included)
 
-## 🖼️ Snapshots
-<p align="center">
-	<img src="docs/images/login.png" alt="Sign in" width="60%"/>
-  
-</p>
-<p align="center">
-	<img src="docs/images/main.png" alt="Courses & enrollment" width="60%"/>
-</p>
-<p align="center">
-	<img src="docs/images/class.png" alt="Forum board" width="45%"/>
-	<img src="docs/images/assgnment.png" alt="Real-time chat" width="45%"/>
-</p>
-<p align="center">
-	<img src="docs/images/grade.png" alt="Profile upload" width="45%"/>
-	<img src="docs/images/grade2.png" alt="Profile upload" width="45%"/>
-</p>
-<p align="center">
-	<img src="docs/images/schedule.png" alt="System architecture diagram" width="80%"/>
-</p>
-<p align="center">
-	<img src="docs/images/chat.png" alt="System architecture diagram" width="80%"/>
-</p>
-
-## 📁 Project Structure (key parts)
+## 📁 Project Structure
 ```
 src/
 	main/                      // backend
@@ -73,7 +52,33 @@ src/
 	webapp/WEB-INF/jsp/         // frontend
 ```
 
-## 🚀 Getting Started (Localhost)
+## 🐳 Docker Setup (Quick Start)
+
+### 1) Prerequisites
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed and running.
+
+### 2) Configuration (.env)
+Create a `.env` file in the root directory.
+
+```properties
+# MySQL Credentials
+MYSQL_ROOT_PASSWORD=rootpassword
+MYSQL_DATABASE=univ_web_schema
+MYSQL_USER=univ_user
+MYSQL_PASSWORD=univ_password
+
+# Email configuration (Optional)
+MAIL_USERNAME=your_email@gmail.com
+MAIL_PASSWORD=your_app_password
+```
+
+### 3) Run
+```
+docker-compose up -d
+```
+Accessible at http://localhost:8080
+
+## 🚀 Local Test Setup
 
 1) Requirements
 - Java 17, MySQL 8.x
@@ -101,6 +106,28 @@ Test accounts
 .\gradlew.bat build
 ```
 Outputs the bootable JAR to `build\libs\UnivWeb-0.0.1-SNAPSHOT.jar`.
+
+## 🖼️ Snapshots
+<p align="center">
+	<img src="docs/images/login.png" alt="Sign in" width="60%"/>
+</p>
+<p align="center">
+	<img src="docs/images/main.png" alt="Courses & enrollment" width="60%"/>
+</p>
+<p align="center">
+	<img src="docs/images/class.png" alt="Forum board" width="45%"/>
+	<img src="docs/images/assgnment.png" alt="Real-time chat" width="45%"/>
+</p>
+<p align="center">
+	<img src="docs/images/grade.png" alt="Profile upload" width="45%"/>
+	<img src="docs/images/grade2.png" alt="Profile upload" width="45%"/>
+</p>
+<p align="center">
+	<img src="docs/images/schedule.png" alt="System architecture diagram" width="80%"/>
+</p>
+<p align="center">
+	<img src="docs/images/chat.png" alt="System architecture diagram" width="80%"/>
+</p>
 
 ## 📄 License
 Please credit the author when you use parts of this repository.
